@@ -12,11 +12,17 @@ func main() {
 		fmt.Println("GitHub CLI extension for sosukesuzuki's OSS development.")
 		os.Exit(0)
 	}
+
+	var err error
 	switch os.Args[1] {
 	case "issue":
-		cmd.Issue()
+		err = cmd.Issue()
 	default:
-		fmt.Fprintf(os.Stderr, "[ERROR] gh sosuke doesn't support `%s`\n", os.Args[1])
+		err = fmt.Errorf("gh sosuke doesn't support `%s`", os.Args[1])
+	}
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "[ERROR] %s\n", err.Error())
 		os.Exit(1)
 	}
 }
