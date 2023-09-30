@@ -56,13 +56,14 @@ func notificationList(client *api.RESTClient) (string, error) {
 	for i, notification := range response {
 		number := path.Base(notification.Subject.Url)
 		title := notification.Subject.Title
+		notifType := notification.Subject.Type
 		hoursAgo, err := calculateHoursAgo(notification.Updated_at)
 
 		if err != nil {
 			return "", err
 		}
 
-		notifications[i] = fmt.Sprintf("%s  %s  %s hours ago", number, title, hoursAgo)
+		notifications[i] = fmt.Sprintf("%s [%s] %s  %s hours ago", number, notifType, title, hoursAgo)
 	}
 	notifList := strings.Join(notifications, "\n")
 
