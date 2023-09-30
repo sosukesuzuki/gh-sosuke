@@ -10,7 +10,7 @@ import (
 	"github.com/cli/go-gh/v2"
 )
 
-func list() (string, error) {
+func issueList() (string, error) {
 	ghCmdStr := append([]string{"issue", "list"}, os.Args[3:]...)
 	issueList, _, err := gh.Exec(ghCmdStr...)
 
@@ -38,7 +38,7 @@ func list() (string, error) {
 	return fields[0], nil
 }
 
-func targetedCommand() (string, error) {
+func issueTargetedCommand() (string, error) {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	inputValue := scanner.Text()
@@ -60,14 +60,14 @@ func targetedCommand() (string, error) {
 func Issue() error {
 	switch os.Args[2] {
 	case "list":
-		out, err := list()
+		out, err := issueList()
 		if err != nil {
 			return err
 		}
 		fmt.Fprintf(os.Stdout, "%s", out)
 		return nil
 	case "close", "create", "delete", "develop", "edit", "lock", "pin", "reopen", "transfer", "unlock", "unpin", "view":
-		out, err := targetedCommand()
+		out, err := issueTargetedCommand()
 		if err != nil {
 			return err
 		}
