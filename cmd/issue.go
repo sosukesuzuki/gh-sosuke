@@ -29,7 +29,13 @@ func list() (string, error) {
 		return "", err
 	}
 
-	return strings.Fields(pecoStdout.String())[0], nil
+	fields := strings.Fields(pecoStdout.String())
+
+	if len(fields) == 0 {
+		return "", nil
+	}
+
+	return fields[0], nil
 }
 
 func targetedCommand() (string, error) {
