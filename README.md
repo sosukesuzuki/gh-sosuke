@@ -30,7 +30,7 @@ gh sosuke issue view
 
 issue 番号を標準入力から読み取り、`gh issue view` に渡して実行します。`view` 以外にも https://cli.github.com/manual/gh_issue で説明されている Targeted commands をすべてサポートしています。
 
-## `gh sosuke notification list`
+### `gh sosuke notification list`
 
 ```sh
 gh sosuke notification list

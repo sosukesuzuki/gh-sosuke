@@ -17,7 +17,7 @@ func main() {
 	switch os.Args[1] {
 	case "issue":
 		err = cmd.Issue()
-	case "notification":
+	case "notification", "notif":
 		err = cmd.Notification()
 	default:
 		err = fmt.Errorf("gh sosuke doesn't support `%s`", os.Args[1])
