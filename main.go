@@ -2,24 +2,23 @@ package main
 
 import (
 	"fmt"
+	"os"
 
-	"github.com/cli/go-gh/v2/pkg/api"
+	"github.com/sosukesuzuki/gh-sosuke/cmd"
 )
 
 func main() {
-	fmt.Println("hi world, this is the gh-sosuke extension!")
-	client, err := api.DefaultRESTClient()
-	if err != nil {
-		fmt.Println(err)
-		return
+	if len(os.Args) == 1 {
+		fmt.Println("GitHub CLI extension for sosukesuzuki's OSS development.")
+		os.Exit(0)
 	}
-	response := struct {Login string}{}
-	err = client.Get("user", &response)
-	if err != nil {
-		fmt.Println(err)
-		return
+	switch os.Args[1] {
+	case "issue":
+		cmd.Issue()
+	default:
+		fmt.Fprintf(os.Stderr, "[ERROR] gh sosuke doesn't support `%s`\n", os.Args[1])
+		os.Exit(1)
 	}
-	fmt.Printf("running as %s\n", response.Login)
 }
 
 // For more examples of using go-gh, see:
